@@ -1,10 +1,22 @@
 {
   "name": "ws7",
   "version": "1.0.0",
+  "nodemonConfig": {
+    "ignore": [
+      "images/",
+      "logs/",
+      "node_modules/",
+      "pdfs/",
+      "snaps/",
+      ".gitignore"
+    ]
+  },
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js",
+    "dev": "nodemon ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/wb9tpg/WS7/issues"
   },
-  "homepage": "https://github.com/wb9tpg/WS7#readme"
+  "homepage": "https://github.com/wb9tpg/WS7#readme",
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
