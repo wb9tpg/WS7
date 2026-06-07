@@ -32,5 +32,8 @@
   "homepage": "https://github.com/wb9tpg/WS7#readme",
   "dependencies": {
     "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "prettier": "3.8.3"
   }
 }

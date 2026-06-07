@@ -8,6 +8,7 @@ tests/
 #   Optional npm cache direcory
 .npm 
 
+.prettierignore
 
 # Optional eslint cache
 .eslintcache
