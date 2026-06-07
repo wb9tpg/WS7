@@ -2,7 +2,7 @@
 logs/
 node_modules/
 pdfs/
-tests/
+tutorial/
 
 # Ignore these files
 #   Optional npm cache direcory

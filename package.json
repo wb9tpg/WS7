@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "nodemonConfig": {
     "ignore": [
+      "tutorial/",
       "images/",
       "logs/",
       "node_modules/",
       "pdfs/",
       "snaps/",
       ".gitignore"
-    ]
+    ],
+    "events": {
+      "start": "clear || cls"
+    }
   },
   "description": "",
   "main": "main.js",
