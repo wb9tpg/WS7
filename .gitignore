@@ -9,6 +9,7 @@ tests/
 .npm 
 
 .prettierignore
+.prettierrc
 
 # Optional eslint cache
 .eslintcache
