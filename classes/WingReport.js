@@ -13,10 +13,14 @@
 //  │  Pure presentation ➔ Loops over tables ➔ Prints layout │
 //  └────────────────────────────────────────────────────────┘
 
+import logger from './LoggerService.js'
 import Table from './WingTable.js'
+
 export default class Report extends Table {
   constructor(fileName) {
     super(fileName)
+    logger.debug('Report class instance created')
+
     console.log(`Report constructor ${fileName}`)
   }
 }

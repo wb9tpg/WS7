@@ -13,20 +13,19 @@
 //  │  Pure presentation ➔ Loops over tables ➔ Prints layout │
 //  └────────────────────────────────────────────────────────┘
 
+import logger from './LoggerService.js'
 import fs from 'fs'
 
 export default class WingSnap {
+  snapData = {}
+
   /**
    * Constructor called from Parent Table Class
    * @param {*} fileName
    */
   constructor(fileName) {
     this.#readFile(fileName) // read the file
-
-    const data = this.#extractAeCeData()
-    this.ae_data = data.ae_data
-    this.ce_data = data.ce_data
-
+    logger.debug('Snap class instance created')
     // console.dir(this.ae_data, { depth: 1, colors: true })
     // console.log(Object.hasOwn(this.snapData, 'ae_data'))
   }
@@ -41,17 +40,14 @@ export default class WingSnap {
       const rawData = fs.readFileSync(fileName, 'utf8')
 
       // Parse the raw string into a JavaScript Object
-      this.snapData = JSON.parse(rawData)
+      const snap = JSON.parse(rawData)
+      this.snapData = snap
+      logger.silly(
+        `${Object.keys(snap).length} top level keys read from ${fileName}`
+      )
     } catch (error) {
       console.error('Error reading or parsing file', error)
     }
     return this
-  }
-
-  #extractAeCeData() {
-    return {
-      ae_data: this.snapData['ae_data'],
-      ce_data: this.snapData['ce_data'],
-    }
   }
 }

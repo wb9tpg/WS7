@@ -1,9 +1,4 @@
+import logger from './classes/LoggerService.js'
 import WingReport from './classes/WingReport.js'
-console.log('hello world')
-console.log('testing')
-console.log('test3')
-
+logger.info('Wing Snap Report Generator started')
 const report = new WingReport('./snaps/Console.json')
-if (true) {
-  console.log('ABC')
-}
