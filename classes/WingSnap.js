@@ -27,7 +27,8 @@ export default class WingSnap {
     this.ae_data = data.ae_data
     this.ce_data = data.ce_data
 
-    console.dir(this.ae_data, { depth: 1, colors: true })
+    // console.dir(this.ae_data, { depth: 1, colors: true })
+    // console.log(Object.hasOwn(this.snapData, 'ae_data'))
   }
 
   /**
