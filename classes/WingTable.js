@@ -21,15 +21,20 @@ export default class WingTable extends WingSnap {
     super(fileName)
     logger.debug('Table class instance created')
 
-    console.dir(this.generateFileInformationTable(this.snapData), {
-      depth: 3,
-      colors: true,
-    })
-
-    // console.dir(this.generateMonitorTable(this.snapData), {
+    // console.dir(this.generateFileInformationTable(this.snapData), {
     //   depth: 3,
     //   colors: true,
     // })
+
+    // console.dir(this.generateAudioEngineBaseConfigurationTable(this.snapData), {
+    //   depth: 3,
+    //   colors: true,
+    // })
+
+    console.dir(this.generateMonitorTable(this.snapData), {
+      depth: 3,
+      colors: true,
+    })
   }
 
   /**
@@ -47,17 +52,19 @@ export default class WingTable extends WingSnap {
     }
   }
 
-  generateBaseCfgTable(snap) {
+  generateAudioEngineBaseConfigurationTable(snap) {
     // Get the Base Config key-value pairs (normally mainlink and dcamgrp)
-    const baseSection = Object.entries(snap?.ae_data?.cfg ?? {}).filter(
-      ([key, value]) => typeof value !== 'object' || value === null
-    )
+    // const baseSection =
 
     // ?const xxx = this.#generateMonitorTable(snap)
 
     return {
-      baseCfg: baseSection,
-      rows: xxx,
+      // baseCfg: baseSection,
+      title: 'Audio Engine Configuration',
+      headers: ['Setting', 'Value'],
+      rows: Object.entries(snap?.ae_data?.cfg ?? {}).filter(
+        ([key, value]) => typeof value !== 'object' || value === null
+      ),
       // allKeys: allKeys,
       // return the entire section
       // allCfg: Object.entries(this.snapData.ae_data?.cfg ?? {}),
