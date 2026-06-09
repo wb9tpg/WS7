@@ -15,6 +15,7 @@
 
 import logger from '../classes/LoggerService.js'
 import Table from '../classes/WingTable.js'
+import { helloWorld } from '../utils/tableFormatters.js'
 
 export default class Report extends Table {
   constructor(fileName) {

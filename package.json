@@ -8,7 +8,6 @@
       "logs/",
       "node_modules/",
       "pdfs/",
-      "snaps/",
       ".gitignore"
     ],
     "events": {

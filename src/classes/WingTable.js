@@ -15,6 +15,7 @@
 
 import logger from './LoggerService.js'
 import WingSnap from '../snaps/WingSnap.js'
+import { helloWorld } from '../utils/tableFormatters.js'
 import METADATA_DICTIONARY from '../../data/json/labels.json' with { type: 'json' }
 
 export default class WingTable extends WingSnap {

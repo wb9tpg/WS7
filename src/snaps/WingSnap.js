@@ -15,6 +15,7 @@
 
 import logger from '../classes/LoggerService.js'
 import fs from 'fs'
+import { helloWorld } from '../utils/tableFormatters.js'
 
 export default class WingSnap {
   snapData = {}
@@ -35,19 +36,64 @@ export default class WingSnap {
    * @param {*} fileName
    */
   #readFile(fileName) {
+    // add the path to the file
+    let fileNamePath = `./storage/wing-snaps/${fileName}`
+
     try {
       // read the file synchronously at a UTF-8 string
-      const rawData = fs.readFileSync(fileName, 'utf8')
+      const rawData = fs.readFileSync(fileNamePath, 'utf8')
 
       // Parse the raw string into a JavaScript Object
       const snap = JSON.parse(rawData)
       this.snapData = snap
-      logger.silly(
-        `${Object.keys(snap).length} top level keys read from ${fileName}`
+      let keyValuePairCount = formatWithCommas(
+        countNonObjectPairs(this.snapData)
       )
+      logger.silly(`${keyValuePairCount} key-value pairs read from ${fileName}`)
     } catch (error) {
+      logger.error(`Fatal Error reading ${fileNamePath}`)
       console.error('Error reading or parsing file', error)
     }
     return this
   }
+}
+
+/**
+ * Count key-value pairs in a nested object,
+ * excluding keys whose values are objects or arrays.
+ *
+ * @param {Object} obj - The JSON object to process
+ * @returns {number} - Count of non-object key-value pairs
+ */
+function countNonObjectPairs(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return 0 // Not an object, nothing to count
+  }
+
+  let count = 0
+
+  for (const key in obj) {
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) continue
+
+    const value = obj[key]
+
+    // Count only if value is NOT an object or array
+    if (value === null || typeof value !== 'object') {
+      count++
+    }
+
+    // If value is an object, recurse into it
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      count += countNonObjectPairs(value)
+    }
+  }
+
+  return count
+}
+
+function formatWithCommas(num) {
+  if (typeof num !== 'number' || isNaN(num)) {
+    throw new Error('Input must be a valid number')
+  }
+  return num.toLocaleString('en-US') // Formats with commas for US locale
 }
