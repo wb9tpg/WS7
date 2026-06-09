@@ -1,7 +1,7 @@
 # Ignore all files in these directories
 logs/
 node_modules/
-public/
+public/pdfs/
 sandbox/
 
 # Ignore these files
