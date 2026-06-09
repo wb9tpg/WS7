@@ -23,7 +23,7 @@ import { helloWorld } from '../utils/tableFormatters.js'
  * @description process Behringer Wing Snap Files
  */
 export default class WingSnap {
-  /** type {Record<string, any>} */
+  /** @type {Record<string, any>} */
   snap
 
   /**
@@ -34,7 +34,6 @@ export default class WingSnap {
   constructor(fileName) {
     this.snap = readSnapFile(fileName)
     logger.debug('Snap class instance created')
-    // console.log(Object.hasOwn(this.snapData, 'ae_data'))
   }
 }
 

@@ -1,3 +1,4 @@
+// @ts-check
 // ┌────────────────────────────────────────────────────────┐
 // │                      1. SNAP TIER                      │
 // │  Reads file ➔ Holds raw JSON ➔ Zero formatting/logic   │
@@ -18,9 +19,19 @@ import WingSnap from '../snaps/WingSnap.js'
 import { helloWorld } from '../utils/tableFormatters.js'
 import METADATA_DICTIONARY from '../../data/json/labels.json' with { type: 'json' }
 
-export default class WingTable extends WingSnap {
+/**
+ * @class WingTable
+ * @description convert from objects into tables built to print
+ */
+class WingTable extends WingSnap {
+  /**
+   * build the constructor
+   * @param {string} fileName
+   */
   constructor(fileName) {
     super(fileName)
     logger.debug('Table class instance created')
   }
 }
+
+export default WingTable
