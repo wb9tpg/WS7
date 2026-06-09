@@ -17,9 +17,16 @@ import logger from '../classes/LoggerService.js'
 import fs from 'fs'
 import { helloWorld } from '../utils/tableFormatters.js'
 
+/**
+ * @class WingSnap
+ * @description process Behringer Wing Snap Files
+ */
 export default class WingSnap {
-  // this.snapData is the snap we read in
-
+  /**
+   * @constructor for WingSnap class
+   * @param {*} fileName - reads the filename into this.snap
+   * @description reads in this json formatted snap
+   */
   constructor(fileName) {
     this.snap = readSnapFile(fileName)
     logger.debug('Snap class instance created')
