@@ -1,8 +1,8 @@
 # Ignore all files in these directories
 logs/
 node_modules/
-pdfs/
-tutorial/
+public/
+sandbox/
 
 # Ignore these files
 #   Optional npm cache direcory
