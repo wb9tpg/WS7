@@ -13,7 +13,7 @@
 //  │  Pure presentation ➔ Loops over tables ➔ Prints layout │
 //  └────────────────────────────────────────────────────────┘
 
-import logger from './LoggerService.js'
+import logger from '../classes/LoggerService.js'
 import fs from 'fs'
 
 export default class WingSnap {

@@ -14,8 +14,8 @@
 // └────────────────────────────────────────────────────────┘
 
 import logger from './LoggerService.js'
-import WingSnap from './WingSnap.js'
-import METADATA_DICTIONARY from '../json/labels.json' with { type: 'json' }
+import WingSnap from '../snaps/WingSnap.js'
+import METADATA_DICTIONARY from '../../data/json/labels.json' with { type: 'json' }
 
 export default class WingTable extends WingSnap {
   constructor(fileName) {

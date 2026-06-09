@@ -7,7 +7,7 @@ class LoggerService {
   constructor(context) {
     // Only one instance is allowed so point to that instance
     if (LoggerService.instance == null) {
-      console.log('creating logger instance')
+      // console.log('creating logger instance')
       LoggerService.instance = this
     }
 
