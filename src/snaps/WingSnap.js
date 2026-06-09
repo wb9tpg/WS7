@@ -1,3 +1,4 @@
+// @ts-check
 //  ┌────────────────────────────────────────────────────────┐
 //  │                      1. SNAP TIER                      │
 //  │  Reads file ➔ Holds raw JSON ➔ Zero formatting/logic   │
@@ -22,28 +23,31 @@ import { helloWorld } from '../utils/tableFormatters.js'
  * @description process Behringer Wing Snap Files
  */
 export default class WingSnap {
+  /** type {Record<string, any>} */
+  snap
+
   /**
    * @constructor for WingSnap class
-   * @param {*} fileName - reads the filename into this.snap
+   * @param {string} fileName - reads the filename into this.snap
    * @description reads in this json formatted snap
    */
   constructor(fileName) {
     this.snap = readSnapFile(fileName)
     logger.debug('Snap class instance created')
-    // console.dir(this.ae_data, { depth: 1, colors: true })
     // console.log(Object.hasOwn(this.snapData, 'ae_data'))
   }
 }
 
 /**
- * @function readSnapFile
- * @description Reads in the Snap file which is a JSON formatted file
+ * Reads in the Snap file which is a JSON formatted file
  * @param {string} fileName - filename and type
  * @returns {Object} snap - json snap data
  * @throws will throw an error if unable to read file
  */
 function readSnapFile(fileName) {
   let fileNamePath = `./storage/wing-snaps/${fileName}`
+
+  /** type Record<string,any>  */
   let snap = {}
 
   try {
@@ -55,19 +59,20 @@ function readSnapFile(fileName) {
 
     let keyValuePairCount = formatWithCommas(countNonObjectPairs(snap))
     logger.silly(`${keyValuePairCount} key-value pairs read from ${fileName}`)
-  } catch (error) {
-    logger.error(`Fatal Error reading ${fileNamePath}`)
+  } catch (err) {
+    // Force-cast 'err' by wrapping it in parentheses like this:
+    const error = /** @type {Error} */ (err)
     console.error('Error reading or parsing file', error)
+    logger.error(`Fatal Error reading ${fileNamePath}`)
   }
   return snap
 }
 
 /**
- * @function countNonObjectPairs
- * @description counts the key-value pairs in a nested object,
- *    excluding keys whose values are objects or arrays.
+ * Counts the key-value pairs in a nested object,
+ * excluding keys whose values are objects or arrays.
  *
- * @param {Object} obj - The JSON object to process
+ * @param {Record<string,any>} obj - The JSON object to process
  * @returns {number} - Count of non-object key-value pairs
  */
 function countNonObjectPairs(obj) {
@@ -97,11 +102,9 @@ function countNonObjectPairs(obj) {
 }
 
 /**
- * @function formatWithCommas
- *
- *
+ * Add a comma or other character to make the number readable
  * @param {number} num - number to convert
- * @returns {string}
+ * @returns {string} string containing the number with proper symbols
  * @throws an error is called with an invalid number
  */
 function formatWithCommas(num) {
