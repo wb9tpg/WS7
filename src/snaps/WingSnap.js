@@ -18,49 +18,47 @@ import fs from 'fs'
 import { helloWorld } from '../utils/tableFormatters.js'
 
 export default class WingSnap {
-  snapData = {}
+  // this.snapData is the snap we read in
 
-  /**
-   * Constructor called from Parent Table Class
-   * @param {*} fileName
-   */
   constructor(fileName) {
-    this.#readFile(fileName) // read the file
+    this.snap = readSnapFile(fileName)
     logger.debug('Snap class instance created')
     // console.dir(this.ae_data, { depth: 1, colors: true })
     // console.log(Object.hasOwn(this.snapData, 'ae_data'))
   }
-
-  /**
-   * Private Method to read the Snap File
-   * @param {*} fileName
-   */
-  #readFile(fileName) {
-    // add the path to the file
-    let fileNamePath = `./storage/wing-snaps/${fileName}`
-
-    try {
-      // read the file synchronously at a UTF-8 string
-      const rawData = fs.readFileSync(fileNamePath, 'utf8')
-
-      // Parse the raw string into a JavaScript Object
-      const snap = JSON.parse(rawData)
-      this.snapData = snap
-      let keyValuePairCount = formatWithCommas(
-        countNonObjectPairs(this.snapData)
-      )
-      logger.silly(`${keyValuePairCount} key-value pairs read from ${fileName}`)
-    } catch (error) {
-      logger.error(`Fatal Error reading ${fileNamePath}`)
-      console.error('Error reading or parsing file', error)
-    }
-    return this
-  }
 }
 
 /**
- * Count key-value pairs in a nested object,
- * excluding keys whose values are objects or arrays.
+ * @function readSnapFile
+ * @description Reads in the Snap file which is a JSON formatted file
+ * @param {string} fileName - filename and type
+ * @returns {Object} snap - json snap data
+ * @throws will throw an error if unable to read file
+ */
+function readSnapFile(fileName) {
+  let fileNamePath = `./storage/wing-snaps/${fileName}`
+  let snap = {}
+
+  try {
+    // read the file synchronously at a UTF-8 string
+    const rawData = fs.readFileSync(fileNamePath, 'utf8')
+
+    // Parse the raw string into a JavaScript Object
+    snap = JSON.parse(rawData)
+
+    let keyValuePairCount = formatWithCommas(countNonObjectPairs(snap))
+    logger.silly(`${keyValuePairCount} key-value pairs read from ${fileName}`)
+  } catch (error) {
+    logger.error(`Fatal Error reading ${fileNamePath}`)
+    console.error('Error reading or parsing file', error)
+  }
+  return snap
+}
+
+/**
+ * @function countNonObjectPairs
+ * @description counts the key-value pairs in a nested object,
+ *    excluding keys whose values are objects or arrays.
  *
  * @param {Object} obj - The JSON object to process
  * @returns {number} - Count of non-object key-value pairs
@@ -91,6 +89,14 @@ function countNonObjectPairs(obj) {
   return count
 }
 
+/**
+ * @function formatWithCommas
+ *
+ *
+ * @param {number} num - number to convert
+ * @returns {string}
+ * @throws an error is called with an invalid number
+ */
 function formatWithCommas(num) {
   if (typeof num !== 'number' || isNaN(num)) {
     throw new Error('Input must be a valid number')
