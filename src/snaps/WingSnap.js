@@ -23,7 +23,7 @@ import { helloWorld } from '../utils/tableFormatters.js'
  * @description process Behringer Wing Snap Files
  */
 export default class WingSnap {
-  /** @type {Record<string, any>} */
+  /** @type {KVP} */
   snap
 
   /**
@@ -46,7 +46,7 @@ export default class WingSnap {
 function readSnapFile(fileName) {
   let fileNamePath = `./storage/wing-snaps/${fileName}`
 
-  /** type Record<string,any>  */
+  /** @type {KVP}  */
   let snap = {}
 
   try {

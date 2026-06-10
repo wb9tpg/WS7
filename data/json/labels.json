@@ -46,7 +46,6 @@
     "fullKeyDebug": "ae_data.cfg.mon.1.lvl",
     "labelText": "Master Output Volume",
     "manualText": "The master output level control for the monitor path. This parameter adjusts the overall volume of the monitor mix, allowing you to set the desired listening level for performers or engineers using the monitor system. Adjusting this control will affect the output level of all channels routed to this monitor path."
-
   },
   "ae_data.cfg.mon.N.inv": {
     "shortKey": "inv",
@@ -1500,7 +1499,7 @@
     "labelText": "Low-Cut Slope Steepness dB/Octave",
     "manualText": "Controls the attenuation slope steepness of the Low-Cut filter, measured in decibels per octave (dB/Oct). A higher value creates a much sharper, aggressive cut that rapidly rejects frequencies below the filter limit, while a lower value provides a smoother, more gradual roll-off."
   },
-    "ae_data.ch.N.flt.hc": {
+  "ae_data.ch.N.flt.hc": {
     "shortKey": "hc",
     "fullKeyDebug": "ae_data.ch.1.flt.hc",
     "labelText": "High-Cut (LPF) Base Frequency Filter Limit",
@@ -1590,7 +1589,7 @@
     "labelText": "Stereo Width Control",
     "manualText": "Adjusts the perceived width of the stereo field for a stereo-linked channel. Modifying this control expands the stereo separation outward for a broader, more immersive soundstage, or narrows it down toward a focused center point to tighten the spatial positioning in the mix."
   },
-    "ae_data.ch.N.solosafe": {
+  "ae_data.ch.N.solosafe": {
     "shortKey": "solosafe",
     "fullKeyDebug": "ae_data.ch.1.solosafe",
     "labelText": "Solo-In-Place Isolation (Solo Safe) Active",
@@ -1728,7 +1727,7 @@
     "labelText": "Profile Type",
     "manualText": "Selects the filter profile type utilized within the noise gate's sidechain detection circuit. You can choose profiles such as Low-Pass, High-Pass, Band-Pass, or Band-Reject to determine exactly which frequency characteristics of the incoming audio will trigger the gate."
   },
-   "ae_data.ch.N.gatesc.f": {
+  "ae_data.ch.N.gatesc.f": {
     "shortKey": "f",
     "fullKeyDebug": "ae_data.ch.1.gatesc.f",
     "labelText": "Primary Frequency Centerpoint",
@@ -1866,7 +1865,7 @@
     "labelText": "EQ Band 4 Q-Factor",
     "manualText": "The Q-factor control for the fourth parametric EQ band, which allows you to adjust the bandwidth of the selected frequency range. A higher Q-factor results in a narrower bandwidth, while a lower Q-factor results in a wider bandwidth. This parameter can be used to fine-tune the tonal balance of the monitor mix."
   },
-   "ae_data.ch.N.eq.hg": {
+  "ae_data.ch.N.eq.hg": {
     "shortKey": "hg",
     "fullKeyDebug": "ae_data.ch.1.eq.hg",
     "labelText": "High-Equalization Band Fixed Gain",
@@ -2160,7 +2159,7 @@
     "labelText": "Stereo Panorama (Pan)",
     "manualText": "Controls the independent stereo pan balance of this channel's feed when directed to a stereo-linked Matrix 2 (MX2) zone bus. This parameter lets you position the audio element anywhere from left to right within the physical sound field of the second matrix output mix."
   },
-    "ae_data.ch.N.send.MX3.on": {
+  "ae_data.ch.N.send.MX3.on": {
     "shortKey": "on",
     "fullKeyDebug": "ae_data.ch.1.send.MX3.on",
     "labelText": "Channel Active Switch",
@@ -2719,7 +2718,7 @@
     "labelText": "EQ Band 4 Q-Factor",
     "manualText": "The Q-factor control for the fourth parametric EQ band, which allows you to adjust the bandwidth of the selected frequency range. A higher Q-factor results in a narrower bandwidth, while a lower Q-factor results in a wider bandwidth. This parameter can be used to fine-tune the tonal balance of the monitor mix."
   },
-   "ae_data.aux.N.eq.hg": {
+  "ae_data.aux.N.eq.hg": {
     "shortKey": "hg",
     "fullKeyDebug": "ae_data.aux.1.eq.hg",
     "labelText": "High-Equalization Band Fixed Gain",
@@ -3319,7 +3318,7 @@
     "labelText": "Low-Equalization Filter Geometry Mode",
     "manualText": "Selects the filter shape or geometry mode for the mix bus low-equalization band. You can toggle this setting between a shelf filter curve (which affects all frequencies below the corner point equally) and a parametric bell curve (which targets a localized frequency zone)."
   },
-"ae_data.bus.N.eq.1g": {
+  "ae_data.bus.N.eq.1g": {
     "shortKey": "1g",
     "fullKeyDebug": "ae_data.bus.1.eq.1g",
     "labelText": "EQ Band 1 Gain",
@@ -3427,7 +3426,7 @@
     "labelText": "EQ Band 6 Q-Factor",
     "manualText": "The Q-factor control for the sixth parametric EQ band, which allows you to adjust the bandwidth of the selected frequency range. A higher Q-factor results in a narrower bandwidth, while a lower Q-factor results in a wider bandwidth. This parameter can be used to fine-tune the tonal balance of the monitor mix."
   },
-    "ae_data.bus.N.eq.hg": {
+  "ae_data.bus.N.eq.hg": {
     "shortKey": "hg",
     "fullKeyDebug": "ae_data.bus.1.eq.hg",
     "labelText": "High-Equalization Band Fixed Gain",

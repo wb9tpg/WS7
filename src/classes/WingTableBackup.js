@@ -264,7 +264,8 @@ export default class WingTable extends WingSnap {
           const physicalKey = `ae_data.cfg.mon.1.${key}.${subKey}`
 
           // Normalize 'mon.1.eq.lsg' -> 'mon.N.eq.lsg' to match your dictionary
-          const lookupKey = physicalKey.replace(/\.\d+\./, '.N.')
+          const lookupKey = physicalKey.replace(/\.[\dAB]+\./i, '.N.')
+          // const lookupKey = physicalKey.replace(/\.\d+\./, '.N.')
           const displayVal = val[subKey] !== undefined ? val[subKey] : 'N/A'
 
           // Dictionary Lookup
@@ -283,7 +284,9 @@ export default class WingTable extends WingSnap {
       } else {
         // Handle Standard Base Values (like lvl, inv, pan)
         const physicalKey = `ae_data.cfg.mon.1.${key}`
-        const lookupKey = physicalKey.replace(/\.\d+\./, '.N.')
+        // const lookupKey = physicalKey.replace(/\.\d+\./, '.N.')
+        const lookupKey = physicalKey.replace(/\.[\dAB]+\./i, '.N.')
+
         const displayVal = val !== undefined ? val : 'N/A'
 
         const meta = METADATA_DICTIONARY[lookupKey] ?? {
