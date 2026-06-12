@@ -5,16 +5,16 @@
 
 import logger from './src/classes/LoggerService.js'
 import WingReport from './src/presentation/WingReport.js'
-import {
-  helloWorld,
-  generateManifestTable,
-  generate4ColumnCfgTable,
-  generate5ColumnCfgTable,
-} from './src/utils/tableFormatters.js'
+// import {
+//   helloWorld,
+//   generateManifestTable,
+//   gen3ColJson,
+//   gen4ColJson,
+// } from './src/utils/tableFormatters.js'
 logger.info('Wing Snap Report Generator started')
 
 const report = new WingReport('Console.json')
-helloWorld()
+// helloWorld()
 
 let s = report.snap
 report.buildReport()

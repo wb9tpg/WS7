@@ -1,3 +1,4 @@
+// @ts-check
 //  ┌────────────────────────────────────────────────────────┐
 //  │                      1. SNAP TIER                      │
 //  │  Reads file ➔ Holds raw JSON ➔ Zero formatting/logic │
@@ -18,12 +19,16 @@ import Table from '../classes/WingTable.js'
 import {
   helloWorld,
   generateManifestTable,
-  generate4ColumnCfgTable,
-  generate5ColumnCfgTable,
+  gen3ColJson,
+  gen4ColJson,
 } from '../utils/tableFormatters.js'
 import { formatValueDisplay } from '../utils/reportFormatters.js'
 
-export default class Report extends Table {
+export default class WingReport extends Table {
+  /**
+   * WingReport class constructor
+   * @param {*} fileName - the snap file for this report
+   */
   constructor(fileName) {
     super(fileName)
     logger.debug('Report class instance created')
@@ -32,35 +37,32 @@ export default class Report extends Table {
   }
 
   buildReport() {
-    // console.dir(generateManifestTable(this.snap))
-    // console.dir(
-    //   generate4ColumnCfgTable(this.snap, '', 'Audio Engine Settings', false)
-    // )
-    // console.table(generate5ColumnCfgTable(this.snap, 'mon', { nested: false }))
-    console.dir(
-      generate4ColumnCfgTable(this.snap, 'solo', 'Solo Settings', true)
-    )
+    const con = { depth: 2 }
+    // console.dir(generateManifestTable(this.snap), con)
+    console.dir(gen3ColJson(this.snap, '', 'Audio Engine Settings', false), con)
+    // console.table(gen4ColJson(this.snap, 'mon', { nested: false }))
+    // console.dir(gen3ColTableJson(this.snap, 'solo', 'Solo Settings', true), con)
     // console.table(
-    //   generate4ColumnCfgTable(this.snap, 'rta', {
+    //   gen3ColJson(this.snap, 'rta', {
     //     title: 'Real Time Analyzer Settings',
     //     nested: true,
     //   })
     // )
     // console.table(
-    //   generate4ColumnCfgTable(this.snap, 'mtr', {
+    //   gen3ColJson(this.snap, 'mtr', {
     //     title: 'Meter Settings',
     //     nested: true,
     //   })
     // )
     // console.table(
-    //   generate4ColumnCfgTable(this.snap, 'talk', {
+    //   gen3ColJson(this.snap, 'talk', {
     //     title: 'Talkback Settings',
     //     nested: false,
     //   })
     // )
-    // console.table(generate5ColumnCfgTable(this.snap, 'talk', { nested: true }))
+    // console.table(gen4ColJson(this.snap, 'talk', { nested: true }))
     // console.table(
-    //   generate4ColumnCfgTable(this.snap, 'amix', {
+    //   gen3ColJson(this.snap, 'amix', {
     //     title: 'Automix Settings',
     //     nested: false,
     //   })

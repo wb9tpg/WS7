@@ -12,7 +12,7 @@ export function helloWorld() {
  * @returns {TableSchema4Col}
  */
 export function generateManifestTable(snap) {
-  logger.debug('Generating Manifest Table')
+  logger.debug('Generating Manifest JSON')
 
   // filter out our manifest
   let { ae_data, ce_data, ...manifest } = snap
@@ -54,14 +54,9 @@ export function generateManifestTable(snap) {
  * @param {boolean} nested - root keys only or fetch nested keys too
  * @returns {TableSchema4Col}
  */
-export function generate4ColumnCfgTable(
-  snap,
-  section = '',
-  title = 'N/A',
-  nested = false
-) {
+export function gen3ColJson(snap, section = '', title = 'N/A', nested = false) {
   logger.debug(
-    `Generaring 4 Column Table - title: "${title}" - nested: ${nested} - section: ${section}`
+    `Generaring 3 Column JSON - title: "${title}" - nested: ${nested} - section: ${section}`
   )
 
   // get the data requested by 'section' for this table
@@ -142,7 +137,7 @@ export function generate4ColumnCfgTable(
  *
  * @param {KVP} snap
  */
-export function generate5ColumnCfgTable(snap, section = 'mon', options = {}) {
+export function gen4ColJson(snap, section = 'mon', options = {}) {
   // setup the mapping to the correct data based on 'section'
   //
 
