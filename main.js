@@ -1,3 +1,8 @@
+/**
+ * @file main.js is the root file for this application
+ * @author Gary Mitchell
+ */
+
 import logger from './src/classes/LoggerService.js'
 import WingReport from './src/presentation/WingReport.js'
 import {
@@ -12,7 +17,12 @@ const report = new WingReport('Console.json')
 helloWorld()
 
 let s = report.snap
+report.buildReport()
 
-// console.table(generate4ColumnCfgTable(s, ''))
-console.dir(generate5ColumnCfgTable(s, 'mon', { nested: false }))
-// generate4ColumnCfgTable(s, 'mtr', { nested: true })
+/**
+ *
+ * @param {string} xxx
+ */
+function me(xxx) {
+  console.log('hello')
+}

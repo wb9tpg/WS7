@@ -1,4 +1,3 @@
-// @ts-check
 // ┌────────────────────────────────────────────────────────┐
 // │                      1. SNAP TIER                      │
 // │  Reads file ➔ Holds raw JSON ➔ Zero formatting/logic   │

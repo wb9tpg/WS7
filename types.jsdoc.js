@@ -15,3 +15,87 @@
  * The standard structural document layout array required by pdfmake [USER].
  * @typedef {any[][]} PdfBodyGrid
  */
+
+/**
+ * Represents a single row in the user management table.
+ * @typedef {Object} TableRow
+ * @property {number} id - The unique user ID column.
+ * @property {string} name - The user's full name column.
+ * @property {string} role - The access permission column (e.g., 'admin').
+ * @property {boolean} isActive - The account status column.
+ */
+
+// /**
+//  * Represents the complete user data table.
+//  * @typedef {TableRow[]} UserTable
+//  */
+
+// /**
+//  * A row represented as a plain array: [id, name, role, isActive]
+//  * @typedef {[number, string, string, boolean]} RawRow
+//  */
+
+// /**
+//  * A table represented as an array of raw array rows.
+//  * @typedef {RawRow[]} RawTable
+//  */
+
+// /** @type {RawTable} */
+// const rawCSVData = [
+//   [1, "Alice", "admin", true],
+//   [2, "Bob", "editor", false]
+// ];
+/**
+ * Strict formatting styles handled by the presentation engine.
+ * @typedef {('dB' | 'percent' | 'ms' | 'none')} FormatType
+ */
+
+/**
+ * Raw 4-column data structure
+ * @typedef {Object} Row4Col
+ * @property {string} setting
+ * @property {string} val1
+ * @property {string} label
+ * @property {string} excerpt
+ * @property {FormatType} formatType - Moved to the end of the row structure
+ */
+
+/**
+ * Raw 5-column data structure
+ * @typedef {Object} Row5Col
+ * @property {string} setting
+ * @property {string} val1
+ * @property {string} val2
+ * @property {string} label
+ * @property {string} excerpt
+ * @property {FormatType} formatType - Moved to the end of the row structure
+ */
+
+/**
+ * @typedef {Object} DisplayHeaders3Col
+ * @property {string} setting
+ * @property {string} val1
+ * @property {string} description
+ */
+
+/**
+ * @typedef {Object} TableSchema4Col
+ * @property {string} tableTitle
+ * @property {DisplayHeaders3Col} columnTitles
+ * @property {Row4Col[]} data
+ */
+
+/**
+ * @typedef {Object} DisplayHeaders4Col
+ * @property {string} setting
+ * @property {string} val1
+ * @property {string} val2
+ * @property {string} description
+ */
+
+/**
+ * @typedef {Object} TableSchema5Col
+ * @property {string} tableTitle
+ * @property {DisplayHeaders4Col} columnTitles
+ * @property {Row5Col[]} data
+ */

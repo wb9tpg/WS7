@@ -3,6 +3,10 @@ logs/
 node_modules/
 public/pdfs/
 sandbox/
+docs/
+
+# jsdocs config file
+jsdoc.json
 
 # Ignore these files
 #   Optional npm cache direcory

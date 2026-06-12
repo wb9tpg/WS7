@@ -1,4 +1,3 @@
-// @ts-check
 import winston from 'winston'
 import fs from 'fs'
 
@@ -9,6 +8,7 @@ let logger_instance = null
  * @class LoggerService
  */
 class LoggerService {
+  static isProduction = process.env.NODE_ENV === 'production'
   /**
    * The cached singleton instance.
    * @type {LoggerService|null}
@@ -16,12 +16,12 @@ class LoggerService {
   static #instance = null
 
   /**
-   * Build out out logger class
-   * @param {string} context - the string describing this logger
-   * @returns
-   * @hideconstructor
+   * Create a instance of LoggerService
+   * @param {string} context
+   * @returns <void>
    */
   constructor(context) {
+    // console.log(process.env)
     // Only one instance is allowed so point to that instance
     if (LoggerService.#instance == null) {
       LoggerService.#instance = this
@@ -46,6 +46,9 @@ class LoggerService {
 
     this.logger = winston.createLogger({
       level: process.env.LOG_LEVEL || 'silly',
+      defaultMeta: {
+        service: this.context,
+      },
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
@@ -132,6 +135,6 @@ class LoggerService {
   }
 }
 
-const logger = new LoggerService('app-service')
+const logger = new LoggerService('app')
 Object.freeze(logger)
 export default logger
