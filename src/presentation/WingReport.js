@@ -32,21 +32,14 @@ export default class Report extends Table {
   }
 
   buildReport() {
-    // manifest - the base keys that describe the file
-    console.dir(generateManifestTable(this.snap))
-    // console.table(
-    //   generate4ColumnCfgTable(this.snap, '', {
-    //     title: 'Audio Engine Settings',
-    //     nested: false,
-    //   })
+    // console.dir(generateManifestTable(this.snap))
+    // console.dir(
+    //   generate4ColumnCfgTable(this.snap, '', 'Audio Engine Settings', false)
     // )
     // console.table(generate5ColumnCfgTable(this.snap, 'mon', { nested: false }))
-    // console.table(
-    //   generate4ColumnCfgTable(this.snap, 'solo', {
-    //     title: 'Solo Settings',
-    //     nested: true,
-    //   })
-    // )
+    console.dir(
+      generate4ColumnCfgTable(this.snap, 'solo', 'Solo Settings', true)
+    )
     // console.table(
     //   generate4ColumnCfgTable(this.snap, 'rta', {
     //     title: 'Real Time Analyzer Settings',

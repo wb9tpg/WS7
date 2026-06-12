@@ -7,8 +7,8 @@ export function helloWorld() {
 }
 
 /**
- *
- * @param {KVP} snap
+ * Extracts the Root Keys from the snap
+ * @param {KVP} snap - the Behringer Wing Snap json content
  * @returns {TableSchema4Col}
  */
 export function generateManifestTable(snap) {
@@ -48,10 +48,18 @@ export function generateManifestTable(snap) {
 
 /**
  *
- * @param {KVP} snap
+ * @param {KVP} snap - the Behringer Wing Snap json content
+ * @param {string} section - 'ae_data.cfg' or 'ae_data.cfg.{section}
+ * @param {string} [title] - the report title
+ * @param {boolean} nested - root keys only or fetch nested keys too
+ * @returns {TableSchema4Col}
  */
-export function generate4ColumnCfgTable(snap, section = '', options = {}) {
-  const { title = 'No Title', nested = false } = options
+export function generate4ColumnCfgTable(
+  snap,
+  section = '',
+  title = 'N/A',
+  nested = false
+) {
   logger.debug(
     `Generaring 4 Column Table - title: "${title}" - nested: ${nested} - section: ${section}`
   )
@@ -66,10 +74,7 @@ export function generate4ColumnCfgTable(snap, section = '', options = {}) {
     var baseKey = `ae_data.cfg.${section}`
   }
 
-  let table = [
-    [title, '', '', ''],
-    ['Setting', 'Value', 'Label', 'Manual Excerpt'],
-  ]
+  let table = []
 
   let keyValuePairs = Object.entries(data)
 
@@ -85,13 +90,15 @@ export function generate4ColumnCfgTable(snap, section = '', options = {}) {
       // const lookupKey = physicalKey.replace(/\.\d+\./, '.N.')
       const lookupKey = physicalKey.replace(/\.[12AB]\./i, '.N.')
       // @ts-ignore
-      const label = METADATA_DICTIONARY[lookupKey] ?? {}
-      var tableRow = [
-        key1,
-        val1,
-        label.labelText ?? 'N/A',
-        label.manualText ?? 'N/A',
-      ]
+      const meta = METADATA_DICTIONARY[lookupKey] ?? {}
+      /** @type {Row4Col} */
+      const tableRow = {
+        setting: key1,
+        val1: val1,
+        label: meta.label ?? 'N/A',
+        excerpt: meta.manualText ?? 'N/A',
+        formatType: meta.formatType ?? 'none',
+      }
       table.push(tableRow)
       // console.log(`key1: ${key1} - val1: ${val1} ${baseKey}.${key1}`)
     } else if (nested) {
@@ -103,22 +110,31 @@ export function generate4ColumnCfgTable(snap, section = '', options = {}) {
         const lookupKey = physicalKey.replace(/\.[12AB]\./i, '.N.')
         var tableRow = [`${key1}-${key2}`, val2]
         // @ts-ignore
-        const label = METADATA_DICTIONARY[lookupKey] ?? {}
-        var tableRow = [
-          `${key1}.${key2}`,
-          val2,
-          label.labelText ?? 'N/A',
-          label.manualText ?? 'N/A',
-        ]
-        table.push(tableRow)
+        const meta = METADATA_DICTIONARY[lookupKey] ?? {}
+        const tableRow2 = {
+          setting: `${key1}.${key2}`,
+          val1: val2,
+          label: meta.label ?? 'N/A',
+          excerpt: meta.manualText ?? 'N/A',
+          formatType: meta.formatType ?? 'none',
+        }
+        table.push(tableRow2)
         // console.log(
         //   `subkey1: ${key1}-${key2} - val2: ${val2} ${baseKey}.${key1}.${key2}`
         // )
       }
     }
   }
+  return {
+    tableTitle: title ?? 'N/A',
+    columnTitles: {
+      setting: 'Setting',
+      val1: 'Value',
+      description: 'Label/Manual Excerpt',
+    },
+    data: table,
+  }
 
-  return table
   // console.dir(keyValuePairs)
 }
 
