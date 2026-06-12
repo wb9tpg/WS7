@@ -1,4 +1,5 @@
 import logger from '../classes/LoggerService.js'
+
 import METADATA_DICTIONARY from '../../data/json/labels.json' with { type: 'json' }
 
 export function helloWorld() {
@@ -8,6 +9,7 @@ export function helloWorld() {
 /**
  *
  * @param {KVP} snap
+ * @returns {TableSchema4Col}
  */
 export function generateManifestTable(snap) {
   logger.debug('Generating Manifest Table')
@@ -16,29 +18,32 @@ export function generateManifestTable(snap) {
   let { ae_data, ce_data, ...manifest } = snap
 
   // Create the table with headers
-  let table = [
-    ['File Manifest', '', '', ''],
-    ['Setting', 'Value', 'Label', 'Manual Excerpt'],
-  ]
-
-  // extract data and see if any exists
-  let keyValuePairs = Object.entries(manifest)
-  if (keyValuePairs.length === 0) return []
+  let table = []
 
   // process each key-value pair and add the
   // label and manual excerpt data to it
-  for (const [key, value] of keyValuePairs) {
+  for (const [key, value] of Object.entries(manifest)) {
     // @ts-ignore
-    const label = METADATA_DICTIONARY[key] ?? {}
-    const tableRow = [
-      key,
-      value,
-      label.labelText ?? 'N/A',
-      label.manualText ?? 'N/A',
-    ]
+    const meta = METADATA_DICTIONARY[key] ?? {}
+    /** @type {Row4Col} */
+    const tableRow = {
+      setting: key,
+      val1: value,
+      label: meta.label ?? 'N/A',
+      excerpt: meta.manualText ?? 'N/A',
+      formatType: 'none',
+    }
     table.push(tableRow)
   }
-  return table
+  return {
+    tableTitle: 'Manifest File Information',
+    columnTitles: {
+      setting: 'Setting',
+      val1: 'Value',
+      description: 'Label/Manual Excerpt',
+    },
+    data: table,
+  }
 }
 
 /**

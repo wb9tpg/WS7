@@ -1,4 +1,4 @@
-function formatValueDisplay(rawValue, formatType) {
+export function formatValueDisplay(rawValue, formatType) {
   // Safe default mapping handling if omitted or set to 'none'
   const activeFormat = formatType ?? 'none'
 

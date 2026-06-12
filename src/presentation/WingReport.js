@@ -21,6 +21,7 @@ import {
   generate4ColumnCfgTable,
   generate5ColumnCfgTable,
 } from '../utils/tableFormatters.js'
+import { formatValueDisplay } from '../utils/reportFormatters.js'
 
 export default class Report extends Table {
   constructor(fileName) {
@@ -32,7 +33,7 @@ export default class Report extends Table {
 
   buildReport() {
     // manifest - the base keys that describe the file
-    console.table(generateManifestTable(this.snap))
+    console.dir(generateManifestTable(this.snap))
     // console.table(
     //   generate4ColumnCfgTable(this.snap, '', {
     //     title: 'Audio Engine Settings',
