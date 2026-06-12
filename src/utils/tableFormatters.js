@@ -31,7 +31,7 @@ export function generateManifestTable(snap) {
       val1: value,
       label: meta.label ?? 'N/A',
       excerpt: meta.manualText ?? 'N/A',
-      formatType: 'none',
+      formatType: meta.formatType ?? 'none',
     }
     table.push(tableRow)
   }
