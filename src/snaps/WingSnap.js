@@ -25,6 +25,11 @@ import { helloWorld } from '../utils/tableFormatters.js'
 export default class WingSnap {
   /** @type {KVP} */
   snap
+  /**
+   * Example usage tracking your file structure:
+   * @type {ProfileMetadataSchema}
+   */
+  static METADATA = {}
 
   /**
    * @constructor for WingSnap class
@@ -32,8 +37,41 @@ export default class WingSnap {
    * @description reads in this json formatted snap
    */
   constructor(fileName) {
+    logger.silly('method: WingSnap constructor')
     this.snap = readSnapFile(fileName)
     logger.debug('Snap class instance created')
+    /** @type {ProfileMetadataSchema} */
+    WingSnap.METADATA = WingSnap.importMetadata('./data/json/labels.json')
+  }
+
+  /**
+   * Loads our labels and manual excerpts
+   * @param {*} fileName
+   * @returns {ProfileMetadataSchema}
+   * @throws will throw an error if unable to read the file
+   */
+  static importMetadata(fileName) {
+    logger.silly('method: importMetadata')
+    /**
+     * Example usage tracking your file structure:
+     * @type {ProfileMetadataSchema}
+     */
+    let metaData = {}
+    logger.debug('Snap class reading label and excerpts')
+    try {
+      const rawMetadata = fs.readFileSync(fileName, 'utf-8')
+      metaData = JSON.parse(rawMetadata)
+      let keyValuePairCount = formatWithCommas(countNonObjectPairs(metaData))
+      logger.silly(`${keyValuePairCount} key-value pairs read from ${fileName}`)
+    } catch (err) {
+      // Force-cast 'err' by wrapping it in parentheses like this:
+      const error = /** @type {Error} */ (err)
+      console.error('Error reading or parsing file', error)
+      logger.error(`Fatal Error reading ${fileName}`)
+      process.exit(1)
+    }
+    // set the static variable with the result
+    return metaData
   }
 }
 
@@ -44,6 +82,7 @@ export default class WingSnap {
  * @throws will throw an error if unable to read file
  */
 function readSnapFile(fileName) {
+  logger.silly('method: readSnapFile')
   let fileNamePath = `./storage/wing-snaps/${fileName}`
 
   /** @type {KVP}  */
@@ -63,6 +102,7 @@ function readSnapFile(fileName) {
     const error = /** @type {Error} */ (err)
     console.error('Error reading or parsing file', error)
     logger.error(`Fatal Error reading ${fileNamePath}`)
+    process.exit(1)
   }
   return snap
 }

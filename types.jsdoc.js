@@ -25,6 +25,21 @@
  * @property {boolean} isActive - The account status column.
  */
 
+/**
+ * Represents a single metadata definition block.
+ * @typedef {Object} MetadataDefinition
+ * @property {string} shortKey - The abbreviated key identifier.
+ * @property {string} fullKeyDebug - The full key name used for debugging.
+ * @property {string} labelText - The human-readable display label.
+ * @property {string} manualText - A detailed description of the field's purpose.
+ * @property {FormatType} [formatType] - how to format the values
+ */
+
+/**
+ * The root dictionary mapping field names to their structural definitions.
+ * @typedef {Object.<string, MetadataDefinition>} ProfileMetadataSchema
+ */
+
 // /**
 //  * Represents the complete user data table.
 //  * @typedef {TableRow[]} UserTable

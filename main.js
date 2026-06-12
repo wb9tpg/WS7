@@ -18,6 +18,7 @@ const report = new WingReport('Console.json')
 
 let s = report.snap
 report.buildReport()
+report.generate('./public/pdfs/WingReport.pdf')
 
 /**
  *

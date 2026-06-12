@@ -1,3 +1,7 @@
+/**
+ * Winston Logger and it's methods
+ * @module LoggerSerices
+ */
 import winston from 'winston'
 import fs from 'fs'
 
@@ -18,7 +22,7 @@ class LoggerService {
   /**
    * Create a instance of LoggerService
    * @param {string} context
-   * @returns <void>
+   * @returns this - the instance of the Winston Logger
    */
   constructor(context) {
     // console.log(process.env)
