@@ -40,6 +40,7 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@types/pdfmake": "^0.3.3",
     "prettier": "3.8.3"
   }
 }

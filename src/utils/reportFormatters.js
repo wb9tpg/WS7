@@ -1,3 +1,6 @@
+import logger from '../classes/LoggerService.js'
+import Snap from '../snaps/WingSnap.js'
+
 export function formatValueDisplay(rawValue, formatType) {
   // Safe default mapping handling if omitted or set to 'none'
   const activeFormat = formatType ?? 'none'
@@ -31,4 +34,71 @@ export function formatValueDisplay(rawValue, formatType) {
   }
 
   return rawValue
+}
+
+export function tableTitleRows(tableTitle = 'Table Title', columnTitles) {
+  const arrColTitles = Object.values(columnTitles)
+  const numColumns = arrColTitles.length
+  logger.silly(`function tableTitleRows: ${tableTitle} - width: ${numColumns}`)
+
+  const tab = {
+    table: {
+      dontBreakRows: true,
+      headerRows: 2,
+      widths: ['auto', 60, '*'],
+      body: [
+        [
+          {
+            text: 'Snap File Data',
+            fontSize: 12,
+            margin: [2, 0, 0, 0],
+            colspan: 3,
+            alignment: 'center',
+            bold: true,
+            color: 'white',
+            fillColor: "#004085"
+          },
+                      {
+              "text": "",
+              "fontSize": 9,
+              "bold": true,
+              "color": "white",
+              "fillColor": "#004085",
+              "alignment": "center"
+            },
+            {
+              "text": "",
+              "fontSize": 9,
+              "bold": true,
+              "color": "white",
+              "fillColor": "#004085"
+            },
+                        {
+              "text": "",
+              "fontSize": 9,
+              "bold": true,
+              "color": "white",
+              "fillColor": "#004085",
+              "alignment": "center"
+            },
+            {
+              "text": "",
+              "fontSize": 9,
+              "bold": true,
+              "color": "white",
+              "fillColor": "#004085"
+            }
+        ],
+      ],
+    },
+  }
+
+  const arrHeaders = []
+
+  const titleRow = [arrColTitles]
+  arrHeaders.push(titleRow)
+  //
+  //
+  console.log(arrHeaders)
+  console.dir(tab)
 }

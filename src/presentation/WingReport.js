@@ -27,6 +27,7 @@ import {
   gen3ColJson,
   gen4ColJson,
 } from '../utils/tableFormatters.js'
+import { tableTitleRows } from '../utils/reportFormatters.js'
 import { formatValueDisplay } from '../utils/reportFormatters.js'
 
 export default class WingReport extends Table {
@@ -164,29 +165,26 @@ export default class WingReport extends Table {
     logger.silly('method: buildReport()')
     logger.info('Building the PDF report content...')
 
-    this.buildCoverAndToc()
-      .heading('h1', 1, { pageBreak: undefined })
-      .heading('h2', 2)
-      .heading('h3', 2)
-      .heading('h1 again', 1)
-      .heading('h2 ...', 2)
+    this.printCoverAndToc()
+      .heading('Introduction', 1, { pageBreak: undefined })
       .paragraph(
         'This report provides a comprehensive overview of the console system configuration, including detailed tables extracted from the Snap file. The following sections present the key-value pairs along with relevant excerpts from the system configuration for each parameter.'
       )
 
+    this.printFileManifest()
+
     const con = { depth: 2 } // object parm for console.dir function
-    // console.dir(generateManifestJson(this.snap), con)
     // console.dir(gen3ColJson(this.snap, '', 'Audio Engine', false), con)
-    console.dir(gen4ColJson(this.snap, 'mon', { nested: false }), con) //TODO
+    // console.dir(gen4ColJson(this.snap, 'mon', { nested: false }), con) //TODO
     // console.dir(gen3ColJson(this.snap, 'solo', 'Solo System', true), con)
     // console.dir(gen3ColJson(this.snap, 'rta', 'Real Time Analyzer', true), con)
     // console.dir(gen3ColJson(this.snap, 'mtr', 'Meter System', true), con)
     // console.dir(gen3ColJson(this.snap, 'talk', 'Talkback System', false), con) //header only
-    // console.table(gen4ColJson(this.snap, 'talk', { nested: true })) // TODO
+    // console.dir(gen4ColJson(this.snap, 'talk', { nested: true })) // TODO
     // console.dir(gen3ColJson(this.snap, 'amix', 'Automix Settings', false), con)
   }
 
-  buildCoverAndToc() {
+  printCoverAndToc() {
     // 1. GENERATE THE TITLE PAGE
     // Use an empty string with a large top margin to center your title block vertically
     logger.debug('Building the Title Page')
@@ -245,6 +243,21 @@ export default class WingReport extends Table {
 
     // 4. FORCE A BREAK AFTER THE TOC SO MAP 1 STARTS FRESH
     this.add({ text: '', pageBreak: 'after' })
+
+    return this
+  }
+
+  printFileManifest() {
+    this.heading('File Manifest Information', 2).paragraph(
+      'The manifest contains information about the file and the equipment that created it.'
+    )
+
+    // const con = { depth: 2 } // object parm for console.dir function
+    // console.dir(generateManifestJson(this.snap), con)
+
+    const manifest = generateManifestJson(this.snap)
+
+    const xyz = tableTitleRows(manifest.tableTitle, manifest.columnTitles)
 
     return this
   }
